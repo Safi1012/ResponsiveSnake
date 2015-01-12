@@ -23,6 +23,10 @@ define( function() {
             for (var i = 0; i < snake.length; i++) {
                 ctx.fillStyle = '#f08624';
                 ctx.fillRect( ((snake[i].x * BOXSIZE) + (leftSpaceHorizontal / 2)), (snake[i].y * BOXSIZE) + (leftSpaceVertical / 2), BOXSIZE, BOXSIZE);
+
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth   = 1;
+                ctx.strokeRect( ((snake[i].x * BOXSIZE) + (leftSpaceHorizontal / 2)), (snake[i].y * BOXSIZE) + (leftSpaceVertical / 2), BOXSIZE, BOXSIZE);
             }
         }
 
