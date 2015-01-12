@@ -28,6 +28,10 @@ define( function() {
                 ctx.lineWidth   = 1;
                 ctx.strokeRect( ((snake[i].x * BOXSIZE) + (leftSpaceHorizontal / 2)), (snake[i].y * BOXSIZE) + (leftSpaceVertical / 2), BOXSIZE, BOXSIZE);
             }
+        },
+
+        clearPlayground:function() {
+            ctx.clearRect ( 0, 0, ctx.canvas.width, ctx.canvas.height);
         }
 
     };

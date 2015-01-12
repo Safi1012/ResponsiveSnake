@@ -8,9 +8,11 @@ define( function() {
     };
 
     var snake = [];
+    var lastDirection;
 
     function Snake(playground){
         this.snake = generateSnakeHead(playground);
+        this.lastDirection = 'right';
     }
 
     function generateSnakeHead(playground) {
@@ -26,40 +28,76 @@ define( function() {
         return snake;
     }
 
+    function moveSnake(xDirection, yDirection) {
+        var previousPos;
+        var nextPos;
+
+        for (var i = 0; i < snake.length; i++) {
+            if (i === 0) {
+                previousPos = new Pos(snake[i].x, snake[i].y);
+
+                snake[i].x += xDirection;
+                snake[i].y += yDirection;
+
+            } else {
+                actualPos = new Pos(snake[i].x, snake[i].y);
+                snake[i].x = previousPos.x;
+                snake[i].y = previousPos.y;
+                previousPos = new Pos(actualPos.x, actualPos.y);
+            }
+        }
+    }
 
     Snake.prototype = {
 
+        detectDirection:function(lastDirection) {
+
+            switch (lastDirection) {
+
+                case 'left':
+                    moveSnake(-1, 0);
+                    break;
+
+                case 'up':
+                    moveSnake(0, -1);
+                    break;
+
+                case 'right':
+                    moveSnake(1, 0);
+                    break;
+
+                case 'bottom':
+                    moveSnake(0, 1);
+                    break;
+            }
+        },
+
         controlSnake:function(direction) {
-
-
-            var safeSnake = this.snake;
-
-
 
             switch (direction) {
 
                 case 'left':
                     if ( (this.snake[0].x === this.snake[1].x) ) {
-                        --this.snake[0].x;
+                        this.lastDirection = 'left';
                     }
                     break;
 
                 case 'up':
                     if ( (this.snake[0].x !== this.snake[1].x) ) {
-                        --this.snake[0].y;
+                        this.lastDirection = 'up';
                     }
 
                     break;
 
                 case 'right':
                     if ( (this.snake[0].x === this.snake[1].x) ) {
-                        ++this.snake[0].x;
+                        this.lastDirection = 'right';
                     }
                     break;
 
                 case 'bottom':
                     if ( (this.snake[0].x !== this.snake[1].x) ) {
-                        ++this.snake[0].y;
+                        this.lastDirection = 'bottom';
                     }
                     break;
             }
