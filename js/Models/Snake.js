@@ -21,9 +21,17 @@ define( function() {
         var xSnakeHead = parseInt(playground.length / 2);
         var ySnakeHead = parseInt(playground[0].length / 2);
 
+        snake = [];
+
         snake.push(new Pos(xSnakeHead, ySnakeHead) );
         snake.push(new Pos(xSnakeHead -1, ySnakeHead) );
         snake.push(new Pos(xSnakeHead -2, ySnakeHead) );
+        snake.push(new Pos(xSnakeHead -3, ySnakeHead) );
+        snake.push(new Pos(xSnakeHead -4, ySnakeHead) );
+        snake.push(new Pos(xSnakeHead -5, ySnakeHead) );
+        snake.push(new Pos(xSnakeHead -6, ySnakeHead) );
+        snake.push(new Pos(xSnakeHead -7, ySnakeHead) );
+        snake.push(new Pos(xSnakeHead -8, ySnakeHead) );
 
         return snake;
     }
@@ -50,7 +58,7 @@ define( function() {
 
     Snake.prototype = {
 
-        detectDirection:function(lastDirection) {
+        controlSnake:function(lastDirection) {
 
             switch (lastDirection) {
 
@@ -72,7 +80,7 @@ define( function() {
             }
         },
 
-        controlSnake:function(direction) {
+        validateDirection:function(direction) {
 
             switch (direction) {
 
@@ -101,15 +109,11 @@ define( function() {
                     }
                     break;
             }
-        },
-
-
-
-        inkrementSnake:function() {
-            for (var i = 0; i < snake.length; i++) {
-                this.snake[i].x += 1;
-            }
         }
+
+
+
+
 
     };
 

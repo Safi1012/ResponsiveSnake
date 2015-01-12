@@ -32,7 +32,12 @@ define( function() {
 
         clearPlayground:function() {
             ctx.clearRect ( 0, 0, ctx.canvas.width, ctx.canvas.height);
+        },
+
+        displayGameOver:function() {
+            return confirm("You died. Dou you wanna try it again?");
         }
+
 
     };
 

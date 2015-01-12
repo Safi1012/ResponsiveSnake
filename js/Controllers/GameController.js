@@ -7,33 +7,43 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundV
         var playground = new Playground(playgroundView.ctx, playgroundView.BOXSIZE);
 
         var snake = new Snake(playground.playground);
+        var rules = new Rules(true);
 
 
-        setInterval(function() {
+        var timerId = setInterval(function() {
 
-            playgroundView.clearPlayground();
+            if (rules.isSnakeAlive(snake.snake, playground.playground)) {
+                document.onkeydown = function(e) {
+                    switch (e.keyCode) {
+                        case 37:
+                            snake.validateDirection('left');
+                            break;
+                        case 38:
+                            snake.validateDirection('up');
+                            break;
+                        case 39:
+                            snake.validateDirection('right');
+                            break;
+                        case 40:
+                            snake.validateDirection('bottom');
+                            break;
+                    }
+                };
+                snake.controlSnake(snake.lastDirection);
+                playgroundView.clearPlayground();
+                playgroundView.drawSnake(snake.snake);
 
-            document.onkeydown = function(e) {
-                switch (e.keyCode) {
-                    case 37:
-                        snake.controlSnake('left');
-                        break;
-                    case 38:
-                        snake.controlSnake('up');
-                        break;
-                    case 39:
-                        snake.controlSnake('right');
-                        break;
-                    case 40:
-                        snake.controlSnake('bottom');
-                        break;
+            } else {
+
+                if (playgroundView.displayGameOver()) {
+                    snake = new Snake(playground.playground);
+                    rules = new Rules(true);
+                } else {
+                    clearInterval(timerId);
                 }
-            };
+            }
 
-            snake.detectDirection(snake.lastDirection);
-            playgroundView.drawSnake(snake.snake);
-
-        }, 150);
+        }, 50);
     }
 
     return {
