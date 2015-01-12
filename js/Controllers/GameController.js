@@ -10,6 +10,16 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundV
         var rules = new Rules(true);
 
 
+
+
+
+        // playground.generateNumber(playground.playground, snake.snake);
+
+
+
+        var food = playground.generateFood(playground.playground, snake.snake);
+
+
         var timerId = setInterval(function() {
 
             if (rules.isSnakeAlive(snake.snake, playground.playground)) {
