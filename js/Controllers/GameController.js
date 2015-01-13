@@ -9,13 +9,13 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundV
         var snake = new Snake(playground.playground);
         var rules = new Rules(true);
 
-
-
+        // for fps measurement
+        var current = 0,
+        lastUpdated = Date.now();
 
 
         //generate food, for game start
         playground.generateFood(playground.playground, snake.snake);
-
 
         var timerId = setInterval(function() {
 
@@ -66,7 +66,17 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundV
                 }
             }
 
+
+            // measure FPS
+            current ++;
+            if (Date.now() - lastUpdated >= 1000) {
+                console.log(current);
+                current = 0;
+                lastUpdated = Date.now();
+            }
+
         }, 50);
+
     }
 
     return {
