@@ -109,12 +109,33 @@ define( function() {
                     }
                     break;
             }
+        },
+
+        inkrementSnake:function() {
+
+            var lastSnakeBodyPart = this.snake.length - 1,
+                xPosLastSnakeBodyPiece = this.snake[lastSnakeBodyPart].x,
+                yPosLastSnakeBodyPiece = this.snake[lastSnakeBodyPart].y;
+
+            switch (this.lastDirection) {
+
+                case 'left':
+                    this.snake.push(new Pos(xPosLastSnakeBodyPiece -1, yPosLastSnakeBodyPiece));
+                    break;
+
+                case 'up':
+                    this.snake.push(new Pos(xPosLastSnakeBodyPiece, yPosLastSnakeBodyPiece -1));
+                    break;
+
+                case 'right':
+                    this.snake.push(new Pos(xPosLastSnakeBodyPiece +1, yPosLastSnakeBodyPiece));
+                    break;
+
+                case 'bottom':
+                    this.snake.push(new Pos(xPosLastSnakeBodyPiece, yPosLastSnakeBodyPiece +1));
+                    break;
+            }
         }
-
-
-
-
-
     };
 
     return Snake;

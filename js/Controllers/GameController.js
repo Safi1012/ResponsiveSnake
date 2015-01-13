@@ -13,11 +13,8 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundV
 
 
 
-        // playground.generateNumber(playground.playground, snake.snake);
-
-
-
-        var food = playground.generateFood(playground.playground, snake.snake);
+        //generate food, for game start
+        playground.generateFood(playground.playground, snake.snake);
 
 
         var timerId = setInterval(function() {
@@ -39,9 +36,25 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundV
                             break;
                     }
                 };
+
                 snake.controlSnake(snake.lastDirection);
+
                 playgroundView.clearPlayground();
                 playgroundView.drawSnake(snake.snake);
+
+
+                if (playground.didSnakeAteFood(snake.snake)) {
+                    // refresh view
+                    playgroundView.snakeAteFood(snake.snake, playground.food);
+
+                    snake.inkrementSnake();
+
+
+                    playground.generateFood(playground.playground, snake.snake);
+                    playgroundView.displayFood(playground.food);
+                } else {
+                    playgroundView.displayFood(playground.food);
+                }
 
             } else {
 

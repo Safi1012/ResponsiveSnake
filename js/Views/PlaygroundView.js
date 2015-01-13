@@ -3,8 +3,7 @@ define( function() {
 
     var BOXSIZE = 20;
     var canvas = document.getElementById('playboard'),
-        ctx = canvas.getContext('2d'),
-        eatenUp = true;
+        ctx = canvas.getContext('2d');
         ctx.canvas.width  = window.innerWidth;
         ctx.canvas.height = window.innerHeight;
 
@@ -15,7 +14,6 @@ define( function() {
     function PlaygroundView() {
         this.ctx = ctx;
         this.BOXSIZE = BOXSIZE;
-        this.eatenUp = true;
     }
 
 
@@ -47,16 +45,12 @@ define( function() {
             ctx.strokeStyle = '#ffffff';
             ctx.lineWidth   = 1;
             ctx.strokeRect( ((food.x * BOXSIZE) + (leftSpaceHorizontal / 2)), (food.y * BOXSIZE) + (leftSpaceVertical / 2), BOXSIZE, BOXSIZE);
-
-            eatenUp = false;
         },
 
         snakeAteFood:function(snake, food) {
-            
+
             if ( (snake[0].x === food.x) && (snake[0].y === food.y) ) {
-                eatenUp = true;
-                ctx.fillStyle = '#ffffff';
-                ctx.fillRect( ((food.x * BOXSIZE) + (leftSpaceHorizontal / 2)), (food.y * BOXSIZE) + (leftSpaceVertical / 2), BOXSIZE, BOXSIZE);
+                ctx.clearRect( ((food.x * BOXSIZE) + (leftSpaceHorizontal / 2)), (food.y * BOXSIZE) + (leftSpaceVertical / 2), BOXSIZE, BOXSIZE);
             }
         }
 

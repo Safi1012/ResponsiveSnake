@@ -6,8 +6,11 @@ define( function() {
         this.y = y;
     };
 
+    var food;
+
     function Playground(ctx, BOXSIZE) {
         this.playground = createPlayground(ctx, BOXSIZE);
+        this.food = food;
     }
 
     function createPlayground(ctx, BOXSIZE) {
@@ -73,7 +76,17 @@ define( function() {
             }
             while (!foundY);
 
-            return new Pos(numberX, numberY);
+            //return new Pos(numberX, numberY);
+
+            this.food = new Pos(numberX, numberY);
+        },
+
+        didSnakeAteFood:function(snake) {
+
+            if ( (snake[0].x === this.food.x) && (snake[0].y === this.food.y) ) {
+                return true;
+            }
+            return false;
         }
     };
 
