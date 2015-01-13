@@ -17,7 +17,7 @@ define( function() {
 	}
 
 	function crashedInWall(snake, playground) {
-		if ( (snake[0].x === -1) || (snake[0].x === playground.length) || (snake[0].y === -1) || (snake[0].y === playground[0].length) ) {
+		if ( (snake[0].x === 0) || (snake[0].x === playground.length -1) || (snake[0].y === 0) || (snake[0].y === playground[0].length -1) ) {
 			return true;
 		}
 		return false;
@@ -29,14 +29,10 @@ define( function() {
 
 		isSnakeAlive:function(snake, playground) {
 			if ( snakeEatingItself(snake) || crashedInWall(snake, playground) ) {
-				// this.alive = 0;
 				return false;
 			} else {
-				// this.alive = 1;
 				return true;
 			}
-
-			// return true;
 		}
 	};
 

@@ -9,23 +9,19 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundV
         var snake = new Snake(playground.playground);
         var rules = new Rules(true);
 
-        // for fps measurement
-        var current = 0,
-        lastUpdated = Date.now();
-
 
         //generate food, for game start
         playground.generateFood(playground.playground, snake.snake);
         controlGame();
 
-
         function controlGame() {
 
             var timerId = setInterval(function() {
 
-                draw();
-
                 if (rules.isSnakeAlive(snake.snake, playground.playground)) {
+
+                    // draw();
+
                     document.onkeydown = function(e) {
                         switch (e.keyCode) {
                             case 37:
@@ -48,6 +44,8 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundV
                         snake.inkrementSnake();
                         playground.generateFood(playground.playground, snake.snake);
                     }
+
+                    draw();
 
                 } else {
 
