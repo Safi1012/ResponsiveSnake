@@ -63,7 +63,6 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundV
 
             playgroundView.clearPlayground();
             playgroundView.drawPlayground();
-            playgroundView.drawScore();
             playgroundView.drawSnake(snake.snake);
             playgroundView.displayFood(playground.food);
         }
