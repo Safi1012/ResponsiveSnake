@@ -19,6 +19,12 @@ define( function() {
 
     PlaygroundView.prototype = {
 
+        drawPlayground:function() {
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect((leftSpaceHorizontal / 2), (leftSpaceVertical / 2), ctx.canvas.width - leftSpaceHorizontal, ctx.canvas.height - leftSpaceVertical);
+            // fillRect(x,y,width,height)
+        },
+
         drawSnake:function(snake) {
             for (var i = 0; i < snake.length; i++) {
                 ctx.fillStyle = '#f08624';
@@ -52,6 +58,12 @@ define( function() {
             if ( (snake[0].x === food.x) && (snake[0].y === food.y) ) {
                 ctx.clearRect( ((food.x * BOXSIZE) + (leftSpaceHorizontal / 2)), (food.y * BOXSIZE) + (leftSpaceVertical / 2), BOXSIZE, BOXSIZE);
             }
+        },
+
+        drawScore:function() {
+            ctx.font = "30px Calibri";
+            ctx.fillStyle = "#5b615c";
+            ctx.fillText("Hello World",400,50);
         }
 
 

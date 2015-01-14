@@ -16,11 +16,11 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundV
 
         function controlGame() {
 
+            draw();
+
             var timerId = setInterval(function() {
 
                 if (rules.isSnakeAlive(snake.snake, playground.playground)) {
-
-                    // draw();
 
                     document.onkeydown = function(e) {
                         switch (e.keyCode) {
@@ -45,8 +45,6 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundV
                         playground.generateFood(playground.playground, snake.snake);
                     }
 
-                    draw();
-
                 } else {
 
                     if (playgroundView.displayGameOver()) {
@@ -64,6 +62,8 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundV
             window.requestAnimationFrame(draw);
 
             playgroundView.clearPlayground();
+            playgroundView.drawPlayground();
+            playgroundView.drawScore();
             playgroundView.drawSnake(snake.snake);
             playgroundView.displayFood(playground.food);
         }

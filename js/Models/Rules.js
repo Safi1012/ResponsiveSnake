@@ -17,7 +17,7 @@ define( function() {
 	}
 
 	function crashedInWall(snake, playground) {
-		if ( (snake[0].x === 0) || (snake[0].x === playground.length -1) || (snake[0].y === 0) || (snake[0].y === playground[0].length -1) ) {
+		if ( (snake[0].x === -1) || (snake[0].x === playground.length) || (snake[0].y === -1) || (snake[0].y === playground[0].length ) ) {
 			return true;
 		}
 		return false;

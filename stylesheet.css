@@ -88,7 +88,7 @@ input, select {
   vertical-align: middle; }
 
 body {
-  color: blue; }
+  background-color: black; }
 
 #playboard {
   width: 100vw;
