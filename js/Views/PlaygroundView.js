@@ -1,15 +1,15 @@
 
 define( function() {
 
-    var BOXSIZE = 20;
-    var canvas = document.getElementById('playboard'),
+    var BOXSIZE = 20,
+        canvas = document.getElementById('playboard'),
         ctx = canvas.getContext('2d');
+
         ctx.canvas.width  = window.innerWidth;
         ctx.canvas.height = window.innerHeight;
 
     var leftSpaceHorizontal = ctx.canvas.width - (parseInt(ctx.canvas.width / BOXSIZE) * BOXSIZE);
-    var leftSpaceVertical = ctx.canvas.height - (parseInt(ctx.canvas.height / BOXSIZE) * BOXSIZE);
-
+        leftSpaceVertical = ctx.canvas.height - (parseInt(ctx.canvas.height / BOXSIZE) * BOXSIZE);
 
     function PlaygroundView() {
         this.ctx = ctx;
@@ -22,7 +22,6 @@ define( function() {
         drawPlayground:function() {
             ctx.fillStyle = '#ffffff';
             ctx.fillRect((leftSpaceHorizontal / 2), (leftSpaceVertical / 2), ctx.canvas.width - leftSpaceHorizontal, ctx.canvas.height - leftSpaceVertical);
-            // fillRect(x,y,width,height)
         },
 
         drawSnake:function(snake) {
@@ -41,7 +40,7 @@ define( function() {
         },
 
         displayGameOver:function() {
-            return confirm("You died. Dou you wanna try it again?");
+            return confirm("Try it again?");
         },
 
         displayFood:function(food) {
@@ -58,14 +57,7 @@ define( function() {
             if ( (snake[0].x === food.x) && (snake[0].y === food.y) ) {
                 ctx.clearRect( ((food.x * BOXSIZE) + (leftSpaceHorizontal / 2)), (food.y * BOXSIZE) + (leftSpaceVertical / 2), BOXSIZE, BOXSIZE);
             }
-        },
-
-        drawScore:function() {
-            ctx.font = "30px Calibri";
-            ctx.fillStyle = "#5b615c";
-            ctx.fillText("Hello World",400,50);
         }
-
 
     };
 

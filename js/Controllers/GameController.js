@@ -89,7 +89,7 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundV
             var xDiff = xDown - xUp;
             var yDiff = yDown - yUp;
 
-            if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+            if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {
                 if ( xDiff > 0 ) {
                     snake.validateDirection('left');
                 } else {
@@ -102,7 +102,6 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundV
                     snake.validateDirection('bottom');
                 }
             }
-            /* reset values */
             xDown = null;
             yDown = null;
         }
