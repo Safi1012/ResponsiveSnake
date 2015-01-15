@@ -8,16 +8,16 @@ define( function() {
 
     var food;
 
-    function Playground(ctx, BOXSIZE) {
-        this.playground = createPlayground(ctx, BOXSIZE);
+    function Playground(canvasWidth, canvasHeight, BOXSIZE) {
+        this.playground = createPlayground(canvasWidth, canvasHeight, BOXSIZE);
         this.food = food;
     }
 
-    function createPlayground(ctx, BOXSIZE) {
-        var playground = new Array( parseInt(ctx.canvas.width / BOXSIZE) );
+    function createPlayground(canvasWidth, canvasHeight, BOXSIZE) {
+        var playground = new Array( parseInt(canvasWidth / BOXSIZE) );
 
         for (var i = 0; i < playground.length; i++) {
-            playground[i] = new Array( parseInt(ctx.canvas.height / BOXSIZE) );
+            playground[i] = new Array( parseInt(canvasHeight / BOXSIZE) );
 
             for (var j = 0; j < playground[i].length; j++) {
                 playground[i][j] = 0;

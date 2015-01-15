@@ -4,7 +4,7 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
     function startGame() {
 
         var playgroundView = new PlaygroundView();
-        var playground = new Playground(playgroundView.ctx, playgroundView.BOXSIZE);
+        var playground = new Playground(playgroundView.canvasWidth, playgroundView.canvasHeight, playgroundView.BOXSIZE);
 
         var snake = new Snake(playground.playground);
         var rules = new Rules(true);
