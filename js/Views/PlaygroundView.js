@@ -71,7 +71,7 @@ define( function() {
         },
 
         displayGameOver:function() {
-            context.font = "4em Calibri";
+            context.font = "2em Calibri";
             context.fillStyle = "#5b615c";
 
             context.textAlign = "center";
