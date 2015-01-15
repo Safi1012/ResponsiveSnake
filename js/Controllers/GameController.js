@@ -8,10 +8,7 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
 
         var snake = new Snake(playground.playground);
         var rules = new Rules(true);
-
         var score = new Score();
-
-
 
 
         if (is_touch_device()) {
@@ -61,7 +58,7 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
                     }, 2000);
                 }
 
-            }, 50);
+            }, 80);
         }
 
 
