@@ -23,8 +23,6 @@ define( function() {
 		return false;
 	}
 
-
-
 	Rules.prototype = {
 
 		isSnakeAlive:function(snake, playground) {

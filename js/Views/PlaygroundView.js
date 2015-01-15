@@ -40,7 +40,11 @@ define( function() {
         },
 
         displayGameOver:function() {
-            return confirm("Try it again?");
+            ctx.font = "4em Calibri";
+            ctx.fillStyle = "#5b615c";
+
+            ctx.textAlign = "center";
+            ctx.fillText("GAME OVER",  (ctx.canvas.width / 2) - (leftSpaceHorizontal / 2), (ctx.canvas.height / 2) - (leftSpaceVertical / 2));
         },
 
         displayFood:function(food) {
@@ -57,6 +61,17 @@ define( function() {
             if ( (snake[0].x === food.x) && (snake[0].y === food.y) ) {
                 ctx.clearRect( ((food.x * BOXSIZE) + (leftSpaceHorizontal / 2)), (food.y * BOXSIZE) + (leftSpaceVertical / 2), BOXSIZE, BOXSIZE);
             }
+        },
+
+        drawScores:function(score, highscore) {
+            ctx.font = "2em Calibri";
+            ctx.fillStyle = "#5b615c";
+
+            ctx.textAlign = "left";
+            ctx.fillText("Score: " + score, 2 * BOXSIZE + (leftSpaceHorizontal / 2), 2 * BOXSIZE + (leftSpaceVertical / 2));
+
+            ctx.textAlign = "right";
+            ctx.fillText("Highscore: " + highscore,  ctx.canvas.width - (2 * BOXSIZE) - (leftSpaceHorizontal / 2),  2 * BOXSIZE + (leftSpaceVertical / 2));
         }
 
     };

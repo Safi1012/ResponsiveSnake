@@ -1,5 +1,5 @@
 
-define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundView'], function( Snake, Rules, Playground, PlaygroundView ) {
+define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'Views/PlaygroundView'], function( Snake, Rules, Playground, Score, PlaygroundView ) {
 
     function startGame() {
 
@@ -8,6 +8,11 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundV
 
         var snake = new Snake(playground.playground);
         var rules = new Rules(true);
+
+        var score = new Score();
+
+
+
 
         if (is_touch_device()) {
             document.addEventListener('touchstart', handleTouchStart, false);
@@ -36,26 +41,26 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundV
 
                     if (playground.didSnakeAteFood(snake.snake)) {
                         snake.inkrementSnake();
+                        score.inkrementScore();
+                        score.saveHighscore();
                         playground.generateFood(playground.playground, snake.snake);
                     }
 
                 } else {
 
-                    if (playgroundView.displayGameOver()) {
+                    clearInterval(timerId);
+
+                    setTimeout(function() {
                         snake = new Snake(playground.playground);
                         rules = new Rules(true);
-                    } else {
-                        clearInterval(timerId);
-                    }
+                        score.saveHighscore();
+                        score.resetScore();
+                        controlGame();
+                    }, 2000);
                 }
 
             }, 50);
         }
-
-
-
-
-
 
 
         function draw() {
@@ -63,8 +68,13 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Views/PlaygroundV
 
             playgroundView.clearPlayground();
             playgroundView.drawPlayground();
+            playgroundView.drawScores(score.score, score.highscore);
             playgroundView.drawSnake(snake.snake);
             playgroundView.displayFood(playground.food);
+
+            if (!rules.isSnakeAlive(snake.snake, playground.playground)) {
+                playgroundView.displayGameOver();
+            }
         }
 
         function is_touch_device() {
