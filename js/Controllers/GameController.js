@@ -27,11 +27,11 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
 
         //generate food, for game start
         playground.generateFood(playground.playground, snake.snake);
+        draw();
         controlGame();
 
-        function controlGame() {
 
-            draw();
+        function controlGame() {
 
             var timerId = setInterval(function() {
 
@@ -53,8 +53,10 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
                     setTimeout(function() {
                         snake = new Snake(playground.playground);
                         rules = new Rules(true);
+
                         score.saveHighscore();
                         score.resetScore();
+                        playground.generateFood(playground.playground, snake.snake);
                         controlGame();
                     }, 2000);
                 }

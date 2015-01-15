@@ -113,28 +113,30 @@ define( function() {
 
         inkrementSnake:function() {
 
-            var lastSnakeBodyPart = this.snake.length - 1,
-                xPosLastSnakeBodyPiece = this.snake[lastSnakeBodyPart].x,
-                yPosLastSnakeBodyPiece = this.snake[lastSnakeBodyPart].y;
+            var lastSnakePosition = this.snake.length - 1,
+                xPosLastSnakeBodyPiece = this.snake[lastSnakePosition].x,
+                yPosLastSnakeBodyPiece = this.snake[lastSnakePosition].y;
 
-            switch (this.lastDirection) {
-
-                case 'left':
-                    this.snake.push(new Pos(xPosLastSnakeBodyPiece -1, yPosLastSnakeBodyPiece));
-                    break;
-
-                case 'up':
-                    this.snake.push(new Pos(xPosLastSnakeBodyPiece, yPosLastSnakeBodyPiece -1));
-                    break;
-
-                case 'right':
-                    this.snake.push(new Pos(xPosLastSnakeBodyPiece +1, yPosLastSnakeBodyPiece));
-                    break;
-
-                case 'bottom':
-                    this.snake.push(new Pos(xPosLastSnakeBodyPiece, yPosLastSnakeBodyPiece +1));
-                    break;
+            // left
+            if (this.snake[lastSnakePosition].x < this.snake[lastSnakePosition - 1].x) {
+                this.snake.push(new Pos(xPosLastSnakeBodyPiece - 1, yPosLastSnakeBodyPiece));
             }
+
+            // top
+            if (this.snake[lastSnakePosition].y < this.snake[lastSnakePosition - 1].y) {
+                this.snake.push(new Pos(xPosLastSnakeBodyPiece, yPosLastSnakeBodyPiece - 1));
+            }
+
+            // right
+            if (this.snake[lastSnakePosition].x > this.snake[lastSnakePosition - 1].x) {
+                this.snake.push(new Pos(xPosLastSnakeBodyPiece + 1, yPosLastSnakeBodyPiece));
+            }
+
+            // bottom
+            if (this.snake[lastSnakePosition].y > this.snake[lastSnakePosition - 1].y) {
+                this.snake.push(new Pos(xPosLastSnakeBodyPiece, yPosLastSnakeBodyPiece + 1));
+            }
+
         }
     };
 
