@@ -1,0 +1,18 @@
+CACHE MANIFEST
+#v3
+
+# Explicitly cached
+CACHE:
+index.html
+img/favicon.ico
+js/
+js/main.js
+stylesheet.css
+manifest.json
+
+# Resources that require the user to be online.
+NETWORK:
+*
+
+# Serve if user is offline, example: specific html
+# FALLBACK:
