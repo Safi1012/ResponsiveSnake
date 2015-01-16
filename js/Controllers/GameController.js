@@ -62,7 +62,7 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
                     }, 2000);
                 }
 
-            }, 80);
+            }, 70);
         }
 
         function draw() {

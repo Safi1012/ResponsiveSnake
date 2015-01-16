@@ -104,7 +104,8 @@ define( function() {
         },
 
         displayGameOver:function() {
-            context.font = "2em Calibri";
+            var fontSize = this.BOXSIZE * 4;
+            context.font = fontSize + 'px Calibri';
             context.fillStyle = "#5b615c";
 
             context.textAlign = "center";
@@ -128,14 +129,16 @@ define( function() {
         },
 
         drawScores:function(score, highscore) {
-            context.font = "2em Calibri";
+
+            var fontSize = this.BOXSIZE * 2;
+            context.font = fontSize + 'px Calibri';
             context.fillStyle = "#5b615c";
 
             context.textAlign = "left";
-            context.fillText("Score: " + score, 2 * this.BOXSIZE + (this.leftSpaceHorizontal / 2), 2 * this.BOXSIZE + (this.leftSpaceVertical / 2));
+            context.fillText("Score: " + score, 2 * this.BOXSIZE + (this.leftSpaceHorizontal / 2), 3 * this.BOXSIZE);
 
             context.textAlign = "right";
-            context.fillText("Highscore: " + highscore,  this.canvasWidth - (2 * this.BOXSIZE) - (this.leftSpaceHorizontal / 2),  2 * this.BOXSIZE + (this.leftSpaceVertical / 2));
+            context.fillText("Highscore: " + highscore,  this.canvasWidth - (2 * this.BOXSIZE) - (this.leftSpaceHorizontal / 2),  3 * this.BOXSIZE);
         }
 
     };
