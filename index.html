@@ -1,7 +1,6 @@
-
 <!DOCTYPE html>
 
-<html>
+<html manifest="snake.appcache">
 
     <head lang="en">
         <meta charset="UTF-8">
@@ -31,11 +30,37 @@
 
         </canvas>
 
-
         <script data-main="js/main" src="js/require.js"></script>
         <script language="javascript" type="js/Polyfill/polyfill_requestAnimationFrame.js"></script>
 
+
         <script type="text/javascript">
+
+            var appCache = window.applicationCache;
+            appCache.update();
+
+            // Is a new cache available?
+            window.addEventListener('load', function(e) {
+
+                window.applicationCache.addEventListener('updateready', function(e) {
+
+                    if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+                        // Browser downloaded a new app cache.
+
+                        window.applicationCache.swapCache();
+                        if (confirm('A new version of this site is available. Load it?')) {
+                            window.location.reload();
+                        }
+                    } else {
+                        // Manifest didn't changed. Nothing new to server.
+                    }
+                }, false);
+
+            }, false);
+
+
+
+
 
         </script>
 
