@@ -10,6 +10,10 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
         var rules = new Rules(true);
         var score = new Score();
 
+        var controlID;
+        var resizeID;
+
+        window.addEventListener('resize', handleResize, false);
 
         if (is_touch_device()) {
             document.addEventListener('touchstart', handleTouchStart, false);
@@ -30,7 +34,7 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
 
         function controlGame() {
 
-            var timerId = setInterval(function() {
+            controlID = setInterval(function() {
 
                 if (rules.isSnakeAlive(snake.snake, playground.playground)) {
 
@@ -45,7 +49,7 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
 
                 } else {
 
-                    clearInterval(timerId);
+                    clearInterval(controlID);
 
                     setTimeout(function() {
                         snake = new Snake(playground.playground);
@@ -60,7 +64,6 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
 
             }, 80);
         }
-
 
         function draw() {
             window.requestAnimationFrame(draw);
@@ -131,6 +134,21 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
             }
         }
 
+        function handleResize() {
+            clearInterval(controlID);
+            clearTimeout(resizeID);
+            resizeID = setTimeout(doneResizing, 1000);
+        }
+
+        function doneResizing() {
+            playgroundView = new PlaygroundView();
+            playground = new Playground(playgroundView.canvasWidth, playgroundView.canvasHeight, playgroundView.BOXSIZE);
+            snake = new Snake(playground.playground);
+            score.resetScore();
+
+            playground.generateFood(playground.playground, snake.snake);
+            controlGame();
+        }
     }
 
     return {
