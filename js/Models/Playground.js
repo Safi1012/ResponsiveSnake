@@ -17,12 +17,13 @@ define( function() {
         var playground = new Array( parseInt(canvasWidth / BOXSIZE) );
 
         for (var i = 0; i < playground.length; i++) {
-            playground[i] = new Array( parseInt(canvasHeight / BOXSIZE) );
+            playground[i] = new Array( parseInt(canvasHeight/ BOXSIZE) );
 
             for (var j = 0; j < playground[i].length; j++) {
                 playground[i][j] = 0;
             }
         }
+
         return playground;
     }
 

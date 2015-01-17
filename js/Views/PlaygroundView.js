@@ -45,26 +45,35 @@ define( function() {
             canvas.style.height = oldHeight + 'px';
 
             context.scale(ratio, ratio);
+
+        } else {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            canvas.style.width = window.innerWidth + 'px';
+            canvas.style.height = window.innerHeight + 'px';
         }
 
         canvasWidth = window.innerWidth;
         canvasHeight = window.innerHeight;
+
     }
 
     function setBOXSIZE() {
 
         // Values from Bootstrap
-        if (window.innerWidth < 768) {
-            return 10;
-        }
-        if (window.innerWidth >= 768) {
-            return 15;
+
+        if (window.innerWidth >= 1220) {
+            return 25;
         }
         if (window.innerWidth >= 992) {
             return 20;
         }
-        if (window.innerWidth >= 1220) {
-            return 25;
+        if (window.innerWidth >= 768) {
+            return 15;
+        }
+        if (window.innerWidth < 768) {
+            return 10;
         }
     }
 
