@@ -62,31 +62,23 @@ define( function() {
     function setBOXSIZE() {
 
         // Values from Bootstrap
-
         if (window.innerWidth >= 1220) {
-            return 25;
-        }
-        if (window.innerWidth >= 992) {
             return 20;
         }
+        if (window.innerWidth >= 992) {
+            return 16;
+        }
         if (window.innerWidth >= 768) {
-            return 15;
+            return 14;
         }
         if (window.innerWidth < 768) {
-            return 10;
+            return 12;
         }
     }
 
     function calculateLeftSpace(size, BOXSIZE) {
         return (size - (parseInt(size / BOXSIZE) * BOXSIZE));
     }
-
-
-
-
-
-
-
 
 
 
