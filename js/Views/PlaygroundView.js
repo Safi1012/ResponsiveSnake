@@ -45,39 +45,40 @@ define( function() {
             canvas.style.height = oldHeight + 'px';
 
             context.scale(ratio, ratio);
+
+        } else {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            canvas.style.width = window.innerWidth + 'px';
+            canvas.style.height = window.innerHeight + 'px';
         }
 
         canvasWidth = window.innerWidth;
         canvasHeight = window.innerHeight;
+
     }
 
     function setBOXSIZE() {
 
         // Values from Bootstrap
-        if (window.innerWidth < 768) {
-            return 10;
-        }
-        if (window.innerWidth >= 768) {
-            return 15;
-        }
-        if (window.innerWidth >= 992) {
+        if (window.innerWidth >= 1220) {
             return 20;
         }
-        if (window.innerWidth >= 1220) {
-            return 25;
+        if (window.innerWidth >= 992) {
+            return 16;
+        }
+        if (window.innerWidth >= 768) {
+            return 14;
+        }
+        if (window.innerWidth < 768) {
+            return 12;
         }
     }
 
     function calculateLeftSpace(size, BOXSIZE) {
         return (size - (parseInt(size / BOXSIZE) * BOXSIZE));
     }
-
-
-
-
-
-
-
 
 
 
@@ -104,12 +105,25 @@ define( function() {
         },
 
         displayGameOver:function() {
-            var fontSize = this.BOXSIZE * 4;
+            var fontSize = this.BOXSIZE * 3;
             context.font = fontSize + 'px Calibri';
             context.fillStyle = "#5b615c";
 
             context.textAlign = "center";
             context.fillText("GAME OVER",  (this.canvasWidth / 2) - (this.leftSpaceHorizontal / 2), (this.canvasHeight / 2) - (this.leftSpaceVertical / 2));
+        },
+
+        displayTryAgain:function(isMobile) {
+            context.fillStyle = "#5b615c";
+            var fontSize = this.BOXSIZE * 1.2;
+            context.font = fontSize + 'px Calibri';
+            context.textAlign = "center";
+
+            if (isMobile) {
+                context.fillText("Tap, to try again",  (this.canvasWidth / 2) - (this.leftSpaceHorizontal / 2), (this.canvasHeight / 2) + (this.BOXSIZE * 1.5));
+            } else {
+                context.fillText("Spacebar, to try again",  (this.canvasWidth / 2) - (this.leftSpaceHorizontal / 2), (this.canvasHeight / 2) + (this.BOXSIZE * 1.5));
+            }
         },
 
         displayFood:function(food) {

@@ -50,16 +50,16 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
                 } else {
 
                     clearInterval(controlID);
+                    score.saveHighscore();
 
-                    setTimeout(function() {
-                        snake = new Snake(playground.playground);
-                        rules = new Rules(true);
+                    // setTimeout(function() {
 
-                        score.saveHighscore();
-                        score.resetScore();
-                        playground.generateFood(playground.playground, snake.snake);
-                        controlGame();
-                    }, 2000);
+
+
+                        // score.resetScore();
+                        // playground.generateFood(playground.playground, snake.snake);
+                        // controlGame();
+                    // }, 2000);
                 }
 
             }, 70);
@@ -76,6 +76,7 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
 
             if (!rules.isSnakeAlive(snake.snake, playground.playground)) {
                 playgroundView.displayGameOver();
+                playgroundView.displayTryAgain(is_touch_device());
             }
         }
 
@@ -86,6 +87,14 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
         function handleTouchStart(evt) {
             xDown = evt.touches[0].clientX;
             yDown = evt.touches[0].clientY;
+
+            if (!rules.isSnakeAlive(snake.snake, playground.playground)) {
+                snake = new Snake(playground.playground);
+                rules = new Rules(true);
+                score.resetScore();
+                playground.generateFood(playground.playground, snake.snake);
+                controlGame();
+            }
         }
 
         function handleTouchMove(evt) {
@@ -131,6 +140,14 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
                 case 40:
                     snake.validateDirection('bottom');
                     break;
+                case 32:
+                    if (!rules.isSnakeAlive(snake.snake, playground.playground)) {
+                        snake = new Snake(playground.playground);
+                        rules = new Rules(true);
+                        score.resetScore();
+                        playground.generateFood(playground.playground, snake.snake);
+                        controlGame();
+                    }
             }
         }
 
