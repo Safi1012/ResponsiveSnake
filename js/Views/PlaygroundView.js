@@ -105,12 +105,25 @@ define( function() {
         },
 
         displayGameOver:function() {
-            var fontSize = this.BOXSIZE * 4;
+            var fontSize = this.BOXSIZE * 3;
             context.font = fontSize + 'px Calibri';
             context.fillStyle = "#5b615c";
 
             context.textAlign = "center";
             context.fillText("GAME OVER",  (this.canvasWidth / 2) - (this.leftSpaceHorizontal / 2), (this.canvasHeight / 2) - (this.leftSpaceVertical / 2));
+        },
+
+        displayTryAgain:function(isMobile) {
+            context.fillStyle = "#5b615c";
+            var fontSize = this.BOXSIZE * 1.2;
+            context.font = fontSize + 'px Calibri';
+            context.textAlign = "center";
+
+            if (isMobile) {
+                context.fillText("Tap, to try again",  (this.canvasWidth / 2) - (this.leftSpaceHorizontal / 2), (this.canvasHeight / 2) + (this.BOXSIZE * 1.5));
+            } else {
+                context.fillText("Spacebar, to try again",  (this.canvasWidth / 2) - (this.leftSpaceHorizontal / 2), (this.canvasHeight / 2) + (this.BOXSIZE * 1.5));
+            }
         },
 
         displayFood:function(food) {
