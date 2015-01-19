@@ -25,12 +25,10 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
             document.addEventListener('keydown', keydown, false);
         }
 
-
         //generate food, for game start
         playground.generateFood(playground.playground, snake.snake);
         draw();
         controlGame();
-
 
         function controlGame() {
 
@@ -48,18 +46,8 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
                     }
 
                 } else {
-
                     clearInterval(controlID);
                     score.saveHighscore();
-
-                    // setTimeout(function() {
-
-
-
-                        // score.resetScore();
-                        // playground.generateFood(playground.playground, snake.snake);
-                        // controlGame();
-                    // }, 2000);
                 }
 
             }, 70);

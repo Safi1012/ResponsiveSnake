@@ -1,7 +1,6 @@
 
 define( function() {
 
-
     var Pos = function (x, y) {
         this.x = x;
         this.y = y;
@@ -16,22 +15,21 @@ define( function() {
     }
 
     function generateSnakeHead(playground) {
-
         // starting positing = center
-        var xSnakeHead = parseInt(playground.length / 2);
-        var ySnakeHead = parseInt(playground[0].length / 2);
+        var xSnakeHead = parseInt(playground.length / 2),
+            ySnakeHead = parseInt(playground[0].length / 2);
 
         snake = [];
 
-        snake.push(new Pos(xSnakeHead, ySnakeHead) );
-        snake.push(new Pos(xSnakeHead -1, ySnakeHead) );
-        snake.push(new Pos(xSnakeHead -2, ySnakeHead) );
-        snake.push(new Pos(xSnakeHead -3, ySnakeHead) );
-        snake.push(new Pos(xSnakeHead -4, ySnakeHead) );
-        snake.push(new Pos(xSnakeHead -5, ySnakeHead) );
-        snake.push(new Pos(xSnakeHead -6, ySnakeHead) );
-        snake.push(new Pos(xSnakeHead -7, ySnakeHead) );
-        snake.push(new Pos(xSnakeHead -8, ySnakeHead) );
+        snake.push(new Pos(xSnakeHead, ySnakeHead));
+        snake.push(new Pos(xSnakeHead -1, ySnakeHead));
+        snake.push(new Pos(xSnakeHead -2, ySnakeHead));
+        snake.push(new Pos(xSnakeHead -3, ySnakeHead));
+        snake.push(new Pos(xSnakeHead -4, ySnakeHead));
+        snake.push(new Pos(xSnakeHead -5, ySnakeHead));
+        snake.push(new Pos(xSnakeHead -6, ySnakeHead));
+        snake.push(new Pos(xSnakeHead -7, ySnakeHead));
+        snake.push(new Pos(xSnakeHead -8, ySnakeHead));
 
         return snake;
     }
@@ -41,9 +39,9 @@ define( function() {
         var nextPos;
 
         for (var i = 0; i < snake.length; i++) {
+
             if (i === 0) {
                 previousPos = new Pos(snake[i].x, snake[i].y);
-
                 snake[i].x += xDirection;
                 snake[i].y += yDirection;
 
@@ -56,10 +54,11 @@ define( function() {
         }
     }
 
+
+
     Snake.prototype = {
 
         controlSnake:function(lastDirection) {
-
             switch (lastDirection) {
 
                 case 'left':
@@ -81,7 +80,6 @@ define( function() {
         },
 
         validateDirection:function(direction) {
-
             switch (direction) {
 
                 case 'left':
@@ -94,7 +92,6 @@ define( function() {
                     if ( (this.snake[0].x !== this.snake[1].x) ) {
                         this.lastDirection = 'up';
                     }
-
                     break;
 
                 case 'right':
@@ -112,7 +109,6 @@ define( function() {
         },
 
         inkrementSnake:function() {
-
             var lastSnakePosition = this.snake.length - 1,
                 xPosLastSnakeBodyPiece = this.snake[lastSnakePosition].x,
                 yPosLastSnakeBodyPiece = this.snake[lastSnakePosition].y;
@@ -136,7 +132,6 @@ define( function() {
             if (this.snake[lastSnakePosition].y > this.snake[lastSnakePosition - 1].y) {
                 this.snake.push(new Pos(xPosLastSnakeBodyPiece, yPosLastSnakeBodyPiece + 1));
             }
-
         }
     };
 

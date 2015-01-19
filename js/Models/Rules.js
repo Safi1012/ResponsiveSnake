@@ -23,8 +23,10 @@ define( function() {
 		return false;
 	}
 
-	Rules.prototype = {
 
+
+	Rules.prototype = {
+		
 		isSnakeAlive:function(snake, playground) {
 			if ( snakeEatingItself(snake) || crashedInWall(snake, playground) ) {
 				return false;
@@ -33,7 +35,6 @@ define( function() {
 			}
 		}
 	};
-
 
 	return Rules;
 });

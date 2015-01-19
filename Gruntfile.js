@@ -22,6 +22,7 @@ module.exports = function (grunt) {
 					basePath: '/',
 					cache: [
 						// 'js/', or wildcard ?
+						'manifest.appcache',
 						'stylesheet.css',
 						'manifest.json',
 						'img/favicon.ico',

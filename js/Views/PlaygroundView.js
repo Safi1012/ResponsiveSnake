@@ -6,9 +6,8 @@ define( function() {
         BOXSIZE,
         canvasWidth,
         canvasHeight,
-        leftSpaceHorizontal,
-        leftSpaceVertical;
-
+        borderSizeLeftAndRight,
+        borderSizeTopBottom;
 
     function PlaygroundView() {
         setupCanvas();
@@ -18,25 +17,25 @@ define( function() {
         this.canvasHeight = canvasHeight;
 
         this.BOXSIZE = setBOXSIZE();
-        this.leftSpaceHorizontal = calculateLeftSpace(this.canvasWidth, this.BOXSIZE);
-        this.leftSpaceVertical = calculateLeftSpace(this.canvasHeight, this.BOXSIZE);
+        this.borderSizeLeftAndRight = calculateLeftSpace(this.canvasWidth, this.BOXSIZE) / 2;
+        this.borderSizeTopBottom = calculateLeftSpace(this.canvasHeight, this.BOXSIZE) / 2;
     }
 
     function setupCanvas() {
+        // context.translate(0.5,0.5);
+
         var devicePixelRatio = window.devicePixelRatio || 1,
             backingStoreRatio = context.webkitBackingStorePixelRatio ||
-            context.mozBackingStorePixelRatio ||
-            context.msBackingStorePixelRatio ||
-            context.oBackingStorePixelRatio ||
-            context.backingStorePixelRatio || 1,
-
+                                context.mozBackingStorePixelRatio ||
+                                context.msBackingStorePixelRatio ||
+                                context.oBackingStorePixelRatio ||
+                                context.backingStorePixelRatio || 1,
             ratio = devicePixelRatio / backingStoreRatio;
-            context.translate(0.5,0.5);
 
         if (devicePixelRatio !== backingStoreRatio) {
 
-            var oldWidth = window.innerWidth;
-            var oldHeight = window.innerHeight;
+            var oldWidth = window.innerWidth,
+                oldHeight = window.innerHeight;
 
             canvas.width = oldWidth * ratio;
             canvas.height = oldHeight * ratio;
@@ -56,11 +55,9 @@ define( function() {
 
         canvasWidth = window.innerWidth;
         canvasHeight = window.innerHeight;
-
     }
 
     function setBOXSIZE() {
-
         // Values from Bootstrap
         if (window.innerWidth >= 1220) {
             return 20;
@@ -86,17 +83,17 @@ define( function() {
 
         drawPlayground:function() {
             context.fillStyle = '#ffffff';
-            context.fillRect( this.leftSpaceHorizontal / 2, this.leftSpaceVertical / 2, this.canvasWidth - this.leftSpaceHorizontal, this.canvasHeight - this.leftSpaceVertical );
+            context.fillRect(this.borderSizeLeftAndRight, this.borderSizeTopBottom, this.canvasWidth - (this.borderSizeLeftAndRight * 2), this.canvasHeight - (this.borderSizeTopBottom * 2));
         },
 
         drawSnake:function(snake) {
             for (var i = 0; i < snake.length; i++) {
                 context.fillStyle = '#f08624';
-                context.fillRect( ((snake[i].x * this.BOXSIZE) + (this.leftSpaceHorizontal / 2)), (snake[i].y * this.BOXSIZE) + (this.leftSpaceVertical / 2), this.BOXSIZE, this.BOXSIZE);
+                context.fillRect((snake[i].x * this.BOXSIZE) + this.borderSizeLeftAndRight, (snake[i].y * this.BOXSIZE) + this.borderSizeTopBottom, this.BOXSIZE, this.BOXSIZE);
 
                 context.strokeStyle = '#ffffff';
                 context.lineWidth   = 1;
-                context.strokeRect( ((snake[i].x * this.BOXSIZE) + (this.leftSpaceHorizontal / 2)), (snake[i].y * this.BOXSIZE) + (this.leftSpaceVertical / 2), this.BOXSIZE, this.BOXSIZE);
+                context.strokeRect((snake[i].x * this.BOXSIZE) + this.borderSizeLeftAndRight, (snake[i].y * this.BOXSIZE) + this.borderSizeTopBottom, this.BOXSIZE, this.BOXSIZE);
             }
         },
 
@@ -110,7 +107,7 @@ define( function() {
             context.fillStyle = "#5b615c";
 
             context.textAlign = "center";
-            context.fillText("GAME OVER",  (this.canvasWidth / 2) - (this.leftSpaceHorizontal / 2), (this.canvasHeight / 2) - (this.leftSpaceVertical / 2));
+            context.fillText("GAME OVER",  (this.canvasWidth / 2) - this.borderSizeLeftAndRight, (this.canvasHeight / 2) - this.borderSizeTopBottom);
         },
 
         displayTryAgain:function(isMobile) {
@@ -120,25 +117,25 @@ define( function() {
             context.textAlign = "center";
 
             if (isMobile) {
-                context.fillText("Tap, to try again",  (this.canvasWidth / 2) - (this.leftSpaceHorizontal / 2), (this.canvasHeight / 2) + (this.BOXSIZE * 1.5));
+                context.fillText("Tap, to try again",  (this.canvasWidth / 2) - this.borderSizeLeftAndRight, (this.canvasHeight / 2) + (this.BOXSIZE * 1.5));
             } else {
-                context.fillText("Spacebar, to try again",  (this.canvasWidth / 2) - (this.leftSpaceHorizontal / 2), (this.canvasHeight / 2) + (this.BOXSIZE * 1.5));
+                context.fillText("Spacebar, to try again",  (this.canvasWidth / 2) - this.borderSizeLeftAndRight, (this.canvasHeight / 2) + (this.BOXSIZE * 1.5));
             }
         },
 
         displayFood:function(food) {
             context.fillStyle = '#2accec';
-            context.fillRect( ((food.x * this.BOXSIZE) + (this.leftSpaceHorizontal / 2)), (food.y * this.BOXSIZE) + (this.leftSpaceVertical / 2), this.BOXSIZE, this.BOXSIZE);
+            context.fillRect( ((food.x * this.BOXSIZE) + this.borderSizeLeftAndRight), (food.y * this.BOXSIZE) + this.borderSizeTopBottom, this.BOXSIZE, this.BOXSIZE);
 
             context.strokeStyle = '#ffffff';
             context.lineWidth   = 1;
-            context.strokeRect( ((food.x * this.BOXSIZE) + (this.leftSpaceHorizontal / 2)), (food.y * this.BOXSIZE) + (this.leftSpaceVertical / 2), this.BOXSIZE, this.BOXSIZE);
+            context.strokeRect( ((food.x * this.BOXSIZE) + this.borderSizeLeftAndRight), (food.y * this.BOXSIZE) + this.borderSizeTopBottom, this.BOXSIZE, this.BOXSIZE);
         },
 
         snakeAteFood:function(snake, food) {
 
             if ( (snake[0].x === food.x) && (snake[0].y === food.y) ) {
-                context.clearRect( ((food.x * this.BOXSIZE) + (this.leftSpaceHorizontal / 2)), (food.y * this.BOXSIZE) + (this.leftSpaceVertical / 2), this.BOXSIZE, this.BOXSIZE);
+                context.clearRect( ((food.x * this.BOXSIZE) + this.borderSizeLeftAndRight), (food.y * this.BOXSIZE) + this.borderSizeTopBottom, this.BOXSIZE, this.BOXSIZE);
             }
         },
 
@@ -149,10 +146,10 @@ define( function() {
             context.fillStyle = "#5b615c";
 
             context.textAlign = "left";
-            context.fillText("Score: " + score, 2 * this.BOXSIZE + (this.leftSpaceHorizontal / 2), 3 * this.BOXSIZE);
+            context.fillText("Score: " + score, 2 * this.BOXSIZE + this.borderSizeLeftAndRight, 3 * this.BOXSIZE);
 
             context.textAlign = "right";
-            context.fillText("Highscore: " + highscore,  this.canvasWidth - (2 * this.BOXSIZE) - (this.leftSpaceHorizontal / 2),  3 * this.BOXSIZE);
+            context.fillText("Highscore: " + highscore,  this.canvasWidth - (2 * this.BOXSIZE) - this.borderSizeLeftAndRight,  3 * this.BOXSIZE);
         }
 
     };

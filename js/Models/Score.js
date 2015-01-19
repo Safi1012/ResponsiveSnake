@@ -17,6 +17,7 @@ define( function() {
         return 0;
     }
 
+
     Score.prototype = {
 
         inkrementScore:function() {

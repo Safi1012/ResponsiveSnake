@@ -52,9 +52,6 @@ define( function() {
     }
 
 
-
-
-
     Playground.prototype = {
 
         generateFood:function(playground, snake) {
@@ -77,8 +74,6 @@ define( function() {
             }
             while (!foundY);
 
-            //return new Pos(numberX, numberY);
-
             this.food = new Pos(numberX, numberY);
         },
 
@@ -90,7 +85,6 @@ define( function() {
             return false;
         }
     };
-
 
     return Playground;
 });
