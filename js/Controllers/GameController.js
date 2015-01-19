@@ -1,17 +1,10 @@
 
-define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'Views/PlaygroundView'], function( Snake, Rules, Playground, Score, PlaygroundView ) {
+define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'Views/PlaygroundView'],
+function( Snake, Rules, Playground, Score, PlaygroundView ) {
 
     function startGame() {
 
-        var playgroundView = new PlaygroundView();
-        var playground = new Playground(playgroundView.canvasWidth, playgroundView.canvasHeight, playgroundView.BOXSIZE);
-
-        var snake = new Snake(playground.playground);
-        var rules = new Rules(true);
-        var score = new Score();
-
-        var controlID;
-        var resizeID;
+        // registrate events for user inputs
 
         window.addEventListener('resize', handleResize, false);
 
@@ -25,10 +18,24 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
             document.addEventListener('keydown', keydown, false);
         }
 
-        //generate food, for game start
+
+        var playgroundView = new PlaygroundView(),
+            playground = new Playground(playgroundView.canvasWidth, playgroundView.canvasHeight, playgroundView.BOXSIZE),
+            snake = new Snake(playground.playground),
+            rules = new Rules(true);
+            score = new Score();
+
+
+        // used to reset interval in controlGame and resizing
+        var controlID,
+            resizeID;
+
+
         playground.generateFood(playground.playground, snake.snake);
         draw();
         controlGame();
+
+
 
         function controlGame() {
 
@@ -91,11 +98,11 @@ define( ['Models/Snake', 'Models/Rules', 'Models/Playground', 'Models/Score', 'V
             }
             evt.preventDefault();
 
-            var xUp = evt.touches[0].clientX;
-            var yUp = evt.touches[0].clientY;
+            var xUp = evt.touches[0].clientX,
+                yUp = evt.touches[0].clientY,
 
-            var xDiff = xDown - xUp;
-            var yDiff = yDown - yUp;
+                xDiff = xDown - xUp,
+                yDiff = yDown - yUp;
 
             if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {
                 if ( xDiff > 0 ) {
