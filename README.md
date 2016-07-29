@@ -7,18 +7,19 @@
 
 # Demo
 
-To play this game just open this webpage:
+To play this game, just open this webpage:
 
-* [http://safi1012.github.io/ResponsiveSnake/](http://safi1012.github.io/ResponsiveSnake/)
+* <a href="http://safi1012.github.io/ResponsiveSnake/" target="_blank">http://safi1012.github.io/ResponsiveSnake/</a>
 
 Have fun!
 
 # Setup
 
-The following list contains all steps you need to compile and execute this project localy.
+The following list contains all steps you need to execute this project localy.
 
-1. Install Grunt: [http://gruntjs.com/getting-started](http://gruntjs.com/getting-started)
-2. Install in the project directory grunt: `npm install`
-3. Navigate in the command-line tool to the project directory and execute: `grunt serve`
+1. Install Node: <a href="https://nodejs.org/en/" target="_blank">https://nodejs.org/en/</a>
+2. Install Grunt: <a href="http://gruntjs.com/getting-started" target="_blank">http://gruntjs.com/getting-started</a>
+3. Navigate to the project directory and install all dependencies: `npm install`
+4. Serve the files to your browser and start playing: `grunt serve`
 
 
